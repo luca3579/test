@@ -1,0 +1,15 @@
+-- TableShcema
+CREATE TABLE supplier_problems (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    supplier_id INTEGER NOT NULL,
+    problem_description TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 查詢過去一天問題最多的前三個 supplier
+SELECT supplier_id, COUNT(*) as problem_count
+FROM supplier_problems
+WHERE created_at >= datetime('now', '-1 day')
+GROUP BY supplier_id
+ORDER BY problem_count DESC
+LIMIT 3;
