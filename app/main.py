@@ -10,29 +10,28 @@ from app.security import generate_key
 import os
 import logging
 from app.utils import AppException
+import uvicorn
 
 # 配置日誌
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# 如果沒有密鑰文件，則生成一個
+# 如果沒有密鑰文件，則產生一個
 if not os.path.exists("secret.key"):
     generate_key()
 
-# 創建所有數據庫表
+# 建立所有資料庫
 models.Base.metadata.create_all(bind=engine)
 
-# 創建 FastAPI 應用實例
-app = FastAPI(title="供應商測試數據 API", version="1.0.0")
+# 建立 FastAPI 
+app = FastAPI(title="supplier testing data API", version="1.0.0")
 
-# 註冊身份驗證和上傳的路由
 app.include_router(auth.router)
 app.include_router(uploads.router)
 
 
-# 自定義異常處理器
 @app.exception_handler(AppException)
 async def app_exception_handler(request, exc):
-    """處理自定義的 AppException"""
+    """ AppException"""
     return JSONResponse(
         status_code=exc.status_code,
         content={"detail": exc.detail},
@@ -57,14 +56,14 @@ async def http_exception_handler(request, exc):
     )
 
 
-# 測試用路由
+# 測試用
 @app.get("/")
 def read_root():
-    """根路徑，用於測試 API 是否正常運行"""
-    logging.info("根端點被訪問")
-    return {"message": "歡迎使用供應商測試數據 API"}
+    """測試 API 是否正常"""
+    logging.info("test")
+    return {"message": "歡迎使用supplier testing data API"}
 
 
 if __name__ == "__main__":
-    import uvicorn
+  
     uvicorn.run(app, host="0.0.0.0", port=8000)

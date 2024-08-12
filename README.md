@@ -1,6 +1,6 @@
-# 供應商測試數據 API
+# supplier testing data API
 
-本專案是基於 FastAPI 的 API 服務，用於處理供應商測試數據。
+本專案是基於 FastAPI 的 API 服務，用於處理supplier testing data。
 
 ## 前置要求
 
@@ -17,8 +17,8 @@
 
 2. 創立虛擬環境並啟動：
    ```
-   python -m venv venv
-   source venv/bin/activate  # Windows 使用 `venv\Scripts\activate`
+   python -m venv .venv
+   source .venv/bin/activate  # Windows 使用 `.venv\Scripts\activate`
    ```
 
 3. 安裝依賴：
@@ -47,7 +47,7 @@
    docker-compose up --build
    ```
 
-   API 將在 `http://localhost:8000` 可用
+   API 將在 `http://localhost:8000` 
 
 ## 運行測試
 
@@ -93,6 +93,6 @@ pytest
 
 - 確保上傳的 ZIP 文件包含必需的 A.txt 和 B.txt 文件。
 - 文件大小限制為 50MB。
-- 所有請求（除了註冊和登錄）都需要在請求頭中包含有效的 JWT 令牌。
+- 所有請求（除了註冊和登錄）都需要在請求頭中包含有效的 JWT token。
 
 如有任何問題或需要進一步的協助，請聯繫專案維護者。

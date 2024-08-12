@@ -3,14 +3,14 @@ from app.utils import AppException
 
 
 def generate_key():
-    """生成新的加密密鑰"""
+    """產生新的加密密鑰"""
     key = Fernet.generate_key()
     with open("secret.key", "wb") as key_file:
         key_file.write(key)
 
 
 def load_key():
-    """從文件中讀取加密密鑰"""
+    """讀取加密密鑰"""
     try:
         return open("secret.key", "rb").read()
     except FileNotFoundError:
